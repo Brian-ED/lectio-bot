@@ -88,7 +88,7 @@ async def on_message(message):
         await message.channel.send(embed=embed)
 
 
-    if message.content.startswith('!updatedb')
+    if message.content.startswith('!updatedb'):
         if message.author.id == int(OWNER):
             sqldb.uploadToTable()
             sqldb.deleteOld()
