@@ -70,8 +70,12 @@ def uploadToTable():
     mincursor = makeCursor(mindb)
     for i in range(len(names)):
         sql = f"INSERT INTO {db_table} (titel, frist, elevtid, slettet) VALUES (%s, %s, %s, False)"
-        val = (names[i], frister[i], elevtid[i])        #print(val)
-        mincursor.execute(sql, val)        mindb.commit()
+        val = (names[i], frister[i], elevtid[i])
+
+        #print(val)
+        mincursor.execute(sql, val)
+
+        mindb.commit()
     print("Data uploadet!")
     mincursor.close()
     mindb.close()
@@ -88,7 +92,9 @@ def showNext(limitval):
     resultater = []
 
     for x in resultat:
-        resultater.append(x)    #print("Lektier optalt...")
+        resultater.append(x)
+
+    #print("Lektier optalt...")
     mincursor.close()
     mindb.close()
     #print(list(resultater[0]))
@@ -98,9 +104,13 @@ def showNext(limitval):
 # Slet gamle opgaver
 def deleteOld():
     mindb = connect()
-    mincursor = makeCursor(mindb)    # Fjerner gamle lektier
+    mincursor = makeCursor(mindb)
+
+    # Fjerner gamle lektier
     sql = f"UPDATE {db_table} SET slettet = True WHERE frist < curtime() AND slettet = False"
-    #sql = f"DELETE FROM {db_table} WHERE frist < curtime()"    mincursor.execute(sql)
+    #sql = f"DELETE FROM {db_table} WHERE frist < curtime()"
+
+    mincursor.execute(sql)
     mindb.commit()
 
     # Fjerner duplicates -- Beholder den lektier med lavest ID
