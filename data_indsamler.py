@@ -70,9 +70,7 @@ def indsaml(fil):
         doc = BeautifulSoup(f, "html.parser")
 
     # Navne
-    tags = doc.find_all("span", title="Gå til opgaveafleveringssiden")
-    
-    names = []
+    tags = doc.find_all("span", title="Gå til opgaveafleveringssiden")    names = []
     for i in range(len(tags)):
         child = tags[i].contents
         names.append(child[0].contents)
@@ -82,14 +80,10 @@ def indsaml(fil):
         #print("".join(str(names[i]).replace(" ", "")))
 
     # Frist
-    tags = doc.find_all("td", class_="nowrap")
-    
-    frister = []
+    tags = doc.find_all("td", class_="nowrap")    frister = []
 
     for i in range(len(tags)):
-        frister.append(tags[i].contents)
-    
-    del frister[2-2::2]
+        frister.append(tags[i].contents)    del frister[2-2::2]
 
     # Elevtid
     tags = doc.find_all("td", class_="numCell")
@@ -97,9 +91,7 @@ def indsaml(fil):
     elevtid = []
 
     for i in range(len(tags)):
-        elevtid.append(str(tags[i].contents))
-        
-    elevtid = "".join(elevtid)
+        elevtid.append(str(tags[i].contents))    elevtid = "".join(elevtid)
 
 
 
@@ -108,9 +100,7 @@ def indsaml(fil):
 
     names = "".join(names)
     while '  ' in names:
-        names = names.replace("  ", " ")
-    
-    names = removeVals(names, '[')
+        names = names.replace("  ", " ")    names = removeVals(names, '[')
     names = removeVals(names, "'")
     names = "".join(names)
     names = names.split("]")
@@ -119,8 +109,6 @@ def indsaml(fil):
     for i in range(len(names)):
         if names[i] == "":
             names.pop(i)
-
-        
 
     frister = flatten(frister)
 
